@@ -1,0 +1,19 @@
+﻿<Page
+    x:Class="ControlServoMotor.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ControlServoMotor"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <StackPanel>
+            <Button x:Name="leftButton" Content="Move Left" Click="moveLeft"></Button>
+            <Button x:Name="rightButton" Content="Move Right" Click="moveRight"></Button>
+            <Button x:Name="upButton" Content="Move Up" Click="moveUp"></Button>
+            <Button x:Name="downButton" Content="Move Down" Click="moveDown"></Button>
+        </StackPanel>
+
+    </Grid>
+</Page>
