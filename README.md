@@ -1,5 +1,5 @@
 # drinabox
 
-Collaborators:
-Andrew Jordan
-Miguel Campos
+## Collaborators:
+- Andrew Jordan
+- Miguel Campos
