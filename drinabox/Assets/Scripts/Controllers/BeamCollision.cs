@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.XR.MagicLeap;
+//using UnityEngine.XR.MagicLeap;
 
 public class BeamCollision : MonoBehaviour
 {
@@ -19,7 +19,7 @@ public class BeamCollision : MonoBehaviour
     public GameObject leftArrow;
     public GameObject rightArrow;    
 
-    private MLInputController _controller;
+    //private MLInputController _controller;
 
     private bool _isTriggering;
     
@@ -81,8 +81,8 @@ public class BeamCollision : MonoBehaviour
 
     private void Start()
     {
-        MLInput.Start();
-        _controller = MLInput.GetController(MLInput.Hand.Left);
+        //MLInput.Start();
+        //_controller = MLInput.GetController(MLInput.Hand.Left);
     }
 
     private void Update()
@@ -93,11 +93,11 @@ public class BeamCollision : MonoBehaviour
             EnableScreen();
         }
 
-        if (_controller.TriggerValue > 0.6f && _isTriggering)
-        {            
-            ResetScreens();            
-            EnableScreen();            
-        }
+        //if (_controller.TriggerValue > 0.6f && _isTriggering)
+        //{            
+        //    ResetScreens();            
+        //    EnableScreen();            
+        //}
     }
 
 
