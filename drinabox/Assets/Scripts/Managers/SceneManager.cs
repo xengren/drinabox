@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//using UnityEngine.XR.MagicLeap;
+using UnityEngine.XR.MagicLeap;
 
 public class SceneManager : MonoBehaviour
 {

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//using UnityEngine.XR.MagicLeap;
+using UnityEngine.XR.MagicLeap;
 using UnityEngine.UI;
 
 public class RemoteCameraManager : MonoBehaviour
@@ -11,7 +11,7 @@ public class RemoteCameraManager : MonoBehaviour
 
     public GameObject container;        
 
-    //private MLHandKeyPose[] _gestures;    
+    private MLHandKeyPose[] _gestures;    
     private Vector3[] pos;
 
     private Vector2 _originalPos;
@@ -29,13 +29,13 @@ public class RemoteCameraManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //_gestures = new MLHandKeyPose[5];
-        //_gestures[0] = MLHandKeyPose.Ok;
-        //_gestures[1] = MLHandKeyPose.Finger;
-        //_gestures[2] = MLHandKeyPose.OpenHandBack;
-        //_gestures[3] = MLHandKeyPose.Fist;
-        //_gestures[4] = MLHandKeyPose.Thumb;
-        //MLHands.KeyPoseManager.EnableKeyPoses(_gestures, true, false);
+        _gestures = new MLHandKeyPose[5];
+        _gestures[0] = MLHandKeyPose.Ok;
+        _gestures[1] = MLHandKeyPose.Finger;
+        _gestures[2] = MLHandKeyPose.OpenHandBack;
+        _gestures[3] = MLHandKeyPose.Fist;
+        _gestures[4] = MLHandKeyPose.Thumb;
+        MLHands.KeyPoseManager.EnableKeyPoses(_gestures, true, false);
         pos = new Vector3[3];
 
         gs = new GestureSender(URI);
@@ -46,38 +46,38 @@ public class RemoteCameraManager : MonoBehaviour
     {        
         if (Config.VIDEO_SCREEN)
         {
-            //if (GetGesture(MLHands.Left, MLHandKeyPose.Finger))
-            //{                                
-            //    Config.USING_FINGER = true;                
+            if (GetGesture(MLHands.Left, MLHandKeyPose.Finger))
+            {                                
+                Config.USING_FINGER = true;                
 
-            //    if (!_getFist)
-            //    {
-            //        _originalPos = referenceCube.transform.position;
-            //        fingerUpCamera = referenceCube.transform.position;
-            //        fingerDownCamera = referenceCube.transform.position;
+                if (!_getFist)
+                {
+                    _originalPos = referenceCube.transform.position;
+                    fingerUpCamera = referenceCube.transform.position;
+                    fingerDownCamera = referenceCube.transform.position;
 
-            //        _getFist = true;
-            //    }
+                    _getFist = true;
+                }
 
-            //    referenceCube.transform.position = MLHands.Left.Wrist.KeyPoints[0].Position;
-            //    //directionText.text = MLHands.Left.Wrist.KeyPoints[0].Position.ToString();
-            //}
-            //else
-            //{
-            //    fingerDownCamera = referenceCube.transform.position;
-            //    checkSwipe();
-            //    _getFist = false;
-            //    directionText.text = "none";
-            //}
+                referenceCube.transform.position = MLHands.Left.Wrist.KeyPoints[0].Position;
+                //directionText.text = MLHands.Left.Wrist.KeyPoints[0].Position.ToString();
+            }
+            else
+            {
+                fingerDownCamera = referenceCube.transform.position;
+                checkSwipe();
+                _getFist = false;
+                directionText.text = "none";
+            }
 
-            //if (Vector3.Distance(_originalPos, referenceCube.transform.position) > 0.085f)
-            //{
-            //    if (!detectSwipeOnlyAfterCameraRelease)
-            //    {
-            //        fingerDownCamera = referenceCube.transform.position;
-            //        checkSwipe();
-            //    }
-            //}
+            if (Vector3.Distance(_originalPos, referenceCube.transform.position) > 0.085f)
+            {
+                if (!detectSwipeOnlyAfterCameraRelease)
+                {
+                    fingerDownCamera = referenceCube.transform.position;
+                    checkSwipe();
+                }
+            }
         }
         
     }
@@ -163,19 +163,19 @@ public class RemoteCameraManager : MonoBehaviour
     }    
 
 
-    //private bool GetGesture(MLHand hand, MLHandKeyPose type)
-    //{
-    //    if (hand != null)
-    //    {
-    //        if (hand.KeyPose == type)
-    //        {
-    //            if (hand.KeyPoseConfidence > 0.6f)
-    //            {
-    //                return true;
-    //            }
-    //        }
-    //    }
-    //    return false;
-    //}
+    private bool GetGesture(MLHand hand, MLHandKeyPose type)
+    {
+        if (hand != null)
+        {
+            if (hand.KeyPose == type)
+            {
+                if (hand.KeyPoseConfidence > 0.6f)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
 }
