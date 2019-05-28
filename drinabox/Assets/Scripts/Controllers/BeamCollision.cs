@@ -18,67 +18,11 @@ public class BeamCollision : MonoBehaviour
 
     public GameObject leftArrow;
     public GameObject rightArrow;    
-
-    //private MLInputController _controller;
-
-    private bool _isTriggering;
-    
-    private bool _overviewTriggered;
-    private bool _profileTriggered;
-
-    private bool _leftArrowTriggered;
-    private bool _rightArrowTriggered;
+         
 
     private bool _delay;
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.name == "Overview")
-        {
-            overviewBlur.SetActive(true);
-        }
-        else if (other.name == "Profile")
-        {
-            profileBlur.SetActive(true);
-        }        
-
-        ResetTriggers();
-        if (other.name == "Overview")
-        {
-            _overviewTriggered = true;
-        }
-        else if (other.name == "Profile")
-        {
-            _profileTriggered = true;
-        }
-        else if (other.name == "leftArrowCollider")
-        {
-            _leftArrowTriggered = true;
-        }
-        else if (other.name == "rightArrowCollider")
-        {
-            _rightArrowTriggered = true;
-        }
-
-        _isTriggering = true;
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.name == "Overview")
-        {
-            overviewBlur.SetActive(false);
-        }
-        else if (other.name == "Profile")
-        {
-            profileBlur.SetActive(false);
-        }
-        
-
-        ResetTriggers();
-        _isTriggering = false;
-    }
-
+    
     private void Start()
     {
         //MLInput.Start();
@@ -87,55 +31,40 @@ public class BeamCollision : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            _leftArrowTriggered = true;
-            EnableScreen();
-        }
-
-        //if (_controller.TriggerValue > 0.6f && _isTriggering)
-        //{            
-        //    ResetScreens();            
-        //    EnableScreen();            
-        //}
-    }
-
-
-    void ResetTriggers()
-    {        
-        _overviewTriggered = false;
-        _profileTriggered = false;
-        _leftArrowTriggered = false;
-        _rightArrowTriggered = false;
-    }
-
-
-    private void EnableScreen()
-    {       
-        if (_overviewTriggered)
-        {
-            overview.SetActive(true);
-        }
-        else if (_profileTriggered)
-        {
-            profile.SetActive(true);
-        }
-        else if (_leftArrowTriggered)
+        /*
+        RaycastHit hit;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Physics.Raycast(ray, out hit);
+        if (hit.collider.name == "leftArrowCollider")
         {
             OnTapLeftArrow();
         }
-        else if (_rightArrowTriggered)
+        */
+
+        /*
+        else if(hit.collider.name == "rightArrowCollider")
         {
             OnTapRightArrow();
         }
+        else if(hit.collider.name == "overviewBlur")
+        {
+            overview.SetActive(true);
+            profile.SetActive(false);
+        }
+        else if (hit.collider.name == "profileBlur")
+        {
+            profile.SetActive(true);
+            overview.SetActive(false);
+        }
+        */
+               
     }
-
+    
 
     private void ResetScreens()
     {        
         overview.SetActive(false);
         profile.SetActive(false);
-
     }
 
 
@@ -153,8 +82,6 @@ public class BeamCollision : MonoBehaviour
             Invoke("DisableDelay", 1f);
         }        
     }
-
-
     private void OnTapRightArrow()
     {
         if (!_delay)
@@ -170,13 +97,7 @@ public class BeamCollision : MonoBehaviour
             Invoke("DisableDelay", 1f);            
         }        
     }
-
-
-    private void EnableProfile()
-    {
-        profile.SetActive(true);
-    }
-
+       
     private void DisableDelay()
     {
         _delay = false;
